@@ -42,3 +42,17 @@ async def question(ctx, *, topic):
 async def answers(ctx, *, topic):
    prompt = f"Provide answers to common questions about: {topic}"
    await ctx.send(ask_ai(prompt))
+
+
+@bot.command()
+async def studymode(ctx, *, topic):
+   await ctx.send(f"Study mode started for: **{topic}**")
+
+   questions = ask_ai(f"Create 3 quiz questions about {topic}")
+   await ctx.send("Questions:\n" + questions)
+
+   answers = ask_ai(f"Provide answers for these questions:\n{questions}")
+   await ctx.send("Answers:\n" + answers)
+
+
+bot.run(DISCORD_TOKEN)
